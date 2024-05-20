@@ -1,6 +1,18 @@
 package org.example;
 
+import java.io.IOException;
+
 public class Graveyard {
+    static Log my_log;
+
+    static {
+        try{
+            my_log = new Log("graveyard.log");
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
     public static boolean isGraveyardDestroyed = false;
 
     public static void setIsGraveyardDestroyed(boolean isGraveyardDestroyed) { // сеттер
@@ -12,10 +24,17 @@ public class Graveyard {
     }
 
     public void destroyGraveyard() {
-        isGraveyardDestroyed = true;
-        Main.graves.clear();
-        System.out.println("Вы разрушили кладбище, эти души свободны, они вас никогда не забудут.");
-        additionalActionsOnDestroy();
+        try {
+            isGraveyardDestroyed = true;
+            Main.graves.clear();
+            System.out.println("Вы разрушили кладбище, эти души свободны, они вас никогда не забудут.");
+            additionalActionsOnDestroy();
+            my_log.logger.info("Кладбище сломано");
+        }
+        catch (Exception e) {
+            my_log.logger.info("Кладбище не сломано" + " " + e);
+        }
+
     }
 
     private static void additionalActionsOnDestroy() {

@@ -1,33 +1,53 @@
 package org.example;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Graves {
+    static Log my_log;
+
+    static {
+        try{
+            my_log = new Log("graves.log");
+        }
+        catch (IOException e){
+            throw new RuntimeException(e);
+        }
+    }
     public void addGraveToGraveyard() {
-        if (!Graveyard.isGraveyardDestroyed) {
-            System.out.println("Добавление новой могилы на кладбище...");
+        try {
+            if (!Graveyard.isGraveyardDestroyed) {
+                System.out.println("Добавление новой могилы на кладбище...");
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Введите ФИО похороненного: ");
-            String name = scanner.nextLine();
-            System.out.print("Введите должность похороненного (если нет введите 'нет'): ");
-            String work = scanner.nextLine();
-            if (work.equals("нет")) { work = ""; }
-            System.out.print("Введите дату смерти: ");
-            String date = scanner.nextLine();
-            System.out.print("Введите описание могилы: ");
-            String description = scanner.nextLine();
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Введите ФИО похороненного: ");
+                String name = scanner.nextLine();
+                System.out.print("Введите должность похороненного (если нет введите 'нет'): ");
+                String work = scanner.nextLine();
+                if (work.equals("нет")) {
+                    work = "";
+                }
+                System.out.print("Введите дату смерти: ");
+                String date = scanner.nextLine();
+                System.out.print("Введите описание могилы: ");
+                String description = scanner.nextLine();
 
-            // "Иван Иванов", "Охранник", "01.01.1950", "Здесь покоится Иван Иванов." - пример
-            String[] grave = new String[] {name, work, date, description};
+                // "Иван Иванов", "Охранник", "01.01.1950", "Здесь покоится Иван Иванов." - пример
+                String[] grave = new String[]{name, work, date, description};
 
-            Main.graves.add(grave);
+                Main.graves.add(grave);
 
-            System.out.println("Могила успешно добавлена: " + name + ", " + date + ", " + description);
-            additionalActionsOnAddGrave();
-        } else {
-            System.out.println("Кладбище разрушено. Добавление могилы невозможно.");
+                System.out.println("Могила успешно добавлена: " + name + ", " + date + ", " + description);
+                additionalActionsOnAddGrave();
+                my_log.logger.info("Могила успешно добавлена: " + name + ", " + date + ", " + description);
+            } else {
+                System.out.println("Кладбище разрушено. Добавление могилы невозможно.");
+                my_log.logger.info("Кладбище разрущено добавление могилы невозможно");
+            }
+        }
+        catch (Exception e) {
+            my_log.logger.info("Кладбище не сломано " + e);
         }
     }
 
@@ -36,30 +56,41 @@ public class Graves {
     }
 
     public void updateGraveDetails() {
-        boolean flag = false;
-        if (!Graveyard.isGraveyardDestroyed) {
-            System.out.println("Обновление информации о могиле на кладбище...");
+        try {
+            boolean flag = false;
+            if (!Graveyard.isGraveyardDestroyed) {
+                System.out.println("Обновление информации о могиле на кладбище...");
 
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Введите ФИО похороненного, данные о котором вы хотите обновить: ");
-            String name = scanner.nextLine();
+                Scanner scanner = new Scanner(System.in);
+                System.out.print("Введите ФИО похороненного, данные о котором вы хотите обновить: ");
+                String name = scanner.nextLine();
 
-            for(int i = 0; i < Main.graves.size(); i++) {
-                String[] graveInfo = Main.graves.get(i);
-                if (Objects.equals(graveInfo[0], name)) {
-                    System.out.print("Введите новое описание могилы: ");
-                    String newDescription = scanner.nextLine();
-                    graveInfo[3] = newDescription;
-                    Main.graves.set(i, graveInfo);
-                    flag = true;
+                for (int i = 0; i < Main.graves.size(); i++) {
+                    String[] graveInfo = Main.graves.get(i);
+                    if (Objects.equals(graveInfo[0], name)) {
+                        System.out.print("Введите новое описание могилы: ");
+                        String newDescription = scanner.nextLine();
+                        graveInfo[3] = newDescription;
+                        Main.graves.set(i, graveInfo);
+                        flag = true;
+                    }
                 }
+
+                if (flag) {
+                    System.out.println("Информация о могиле успешно обновлена: " + name + ".");
+                    my_log.logger.info("Информация о могиле обновлена ");
+                } else {
+                    System.out.println("Могила не найдена: " + name + ".");
+                    my_log.logger.info("Информация о могиле не изменена из-за разрушеного кладбища");
+                }
+
+            } else {
+                System.out.println("Кладбище разрушено. Обновление информации о могиле невозможно.");
+                my_log.logger.info("Информация о могиле не изменена из-за разрушеного кладбища");
             }
-
-            if (flag) { System.out.println("Информация о могиле успешно обновлена: " + name + "."); }
-            else { System.out.println("Могила не найдена: " + name + "."); }
-
-        } else {
-            System.out.println("Кладбище разрушено. Обновление информации о могиле невозможно.");
+        }
+        catch (Exception e) {
+            my_log.logger.info("Информация о могиле завершена с ошикбкой: " + e);
         }
     }
 
