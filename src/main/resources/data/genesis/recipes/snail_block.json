@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "genesis:snail"
+    },
+    {
+      "item": "genesis:snail"
+    },
+    {
+      "item": "genesis:snail"
+    },
+    {
+      "item": "genesis:snail"
+    }
+  ],
+  "result": {
+    "item": "genesis:snail_block",
+    "count": 1
+  }
+}

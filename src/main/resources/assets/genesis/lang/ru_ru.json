@@ -1,0 +1,10 @@
+{
+  "item.genesis.butterfly": "Бабочка",
+  "item.genesis.snail": "Улитка",
+  "item.genesis.chitin": "Хитин",
+  "item.genesis.cowbug": "Божья коровка",
+  "block.genesis.anthill": "Муравейник",
+  "block.genesis.termite_tree": "Термитное дерево",
+  "block.genesis.snail_block": "Блок слизи улитки",
+  "block.genesis.chitin_block": "Хитиновый блок"
+}
