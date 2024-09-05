@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -25,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
         openBtn = findViewById(R.id.open_new_layout);
         open2Btn = findViewById(R.id.open_new_layout2);
 
+        Animation slideAnimation = AnimationUtils.loadAnimation(this, R.anim.slide_animation);
+        openBtn.startAnimation(slideAnimation);
+        open2Btn.startAnimation(slideAnimation);
+
         openBtn.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -32,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
                 startActivity(intent);
-
+                overridePendingTransition(R.anim.sunny, R.anim.alpha);
             }
 
         });
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
                 startActivity(intent);
-
+                overridePendingTransition(R.anim.crash, R.anim.alpha);
             }
 
         });

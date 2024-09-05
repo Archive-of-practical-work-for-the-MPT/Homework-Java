@@ -25,4 +25,5 @@
         <activity android:label="TweenAnimation" android:name=".ThirdActivity"/>
     </application>
 
+
 </manifest>

@@ -27,6 +27,10 @@ public class ThirdActivity extends AppCompatActivity {
         openBtn = findViewById(R.id.open_menu2);
 
         Animation blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink_animation);
+        Animation fadingAnimation = AnimationUtils.loadAnimation(this, R.anim.fading_animation);
+        startBtn.startAnimation(fadingAnimation);
+        pauseBtn.startAnimation(fadingAnimation);
+        openBtn.startAnimation(fadingAnimation);
 
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +53,7 @@ public class ThirdActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(ThirdActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide, R.anim.alpha);
 
             }
 

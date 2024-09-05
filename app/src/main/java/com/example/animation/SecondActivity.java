@@ -28,6 +28,11 @@ public class SecondActivity extends AppCompatActivity {
         pauseBtn = findViewById(R.id.pauseButton);
         openBtn = findViewById(R.id.open_menu);
 
+        Animation zoomAnimation = AnimationUtils.loadAnimation(this, R.anim.zoom_animation);
+        startBtn.startAnimation(zoomAnimation);
+        pauseBtn.startAnimation(zoomAnimation);
+        openBtn.startAnimation(zoomAnimation);
+
         frameAnimation = (AnimationDrawable) animationTV.getDrawable();
 
         startBtn.setOnClickListener(v -> {
@@ -49,6 +54,7 @@ public class SecondActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(SecondActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.diagonaltranslate, R.anim.alpha);
 
             }
 
