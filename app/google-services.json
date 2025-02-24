@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "439438419770",
+    "project_id": "authp1-8d1d6",
+    "storage_bucket": "authp1-8d1d6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439438419770:android:f033e892736fdc9efc5203",
+        "android_client_info": {
+          "package_name": "com.example.authp1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDamtKJ_KGa-U3-nJq6qrH1eHlhzdRGhrg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
