@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView filmPoster;
 
     private static final String BASE_URL = "https://kinopoiskapiunofficial.tech/api/v2.2/";
-    private static final String API_KEY = "63724510-6df6-4f4a-a3f0-e74247042167";
+    private static final String API_KEY = "36a2fd03-ce22-4153-98df-66003f4d6b89";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
